@@ -37,7 +37,8 @@
             android:textColor="@color/white"
             android:layout_weight="1"
             android:layout_width="1dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/Accent"/>
 
         <Button
             android:id="@+id/btnSignIn"
@@ -45,7 +46,8 @@
             android:textColor="@color/white"
             android:layout_weight="1"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@color/Accent"/>
 
 
     </LinearLayout>
