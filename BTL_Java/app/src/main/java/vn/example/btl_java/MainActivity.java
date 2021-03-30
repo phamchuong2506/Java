@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 , et_Password.getText().toString().trim())) {
 
 
-            Intent accountsIntent = new Intent(activity, UserListActivity.class);
+            Intent accountsIntent = new Intent(activity, Home.class);
             accountsIntent.putExtra("EMAIL", et_Email.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);
