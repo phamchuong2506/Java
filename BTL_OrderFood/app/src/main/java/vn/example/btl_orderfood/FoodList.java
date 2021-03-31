@@ -54,12 +54,12 @@ public class FoodList extends AppCompatActivity {
         adapter=new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item,FoodViewHolder.class,foodList.orderByChild("MenuId").equalTo(categoryId)) {
             @Override
-            protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
-                foodViewHolder.food_name.setText(food.getName());
-                Picasso.with(getBaseContext()).load(food.getImage()).into(foodViewHolder.food_image);
+            protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
+                viewHolder.food_name.setText(food.getName());
+                Picasso.with(getBaseContext()).load(food.getImage()).into(viewHolder.food_image);
 
                 final Food local =food;
-                foodViewHolder.setItemClickListener(new ItemClickListener() {
+                viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
