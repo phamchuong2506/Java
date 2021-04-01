@@ -48,6 +48,7 @@ public class SignIn extends AppCompatActivity {
                         if(snapshot.child(edtPhone.getText().toString()).exists()){
                         mDialog.dismiss();
                         User user= snapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                        user.setPhone(edtPhone.getText().toString());
                         if(user.getPassword().equals(edtPassword.getText().toString()))
                         {
                             /*Toast.makeText(SignIn.this,"Dang nhap thanh cong", Toast.LENGTH_SHORT).show();*/

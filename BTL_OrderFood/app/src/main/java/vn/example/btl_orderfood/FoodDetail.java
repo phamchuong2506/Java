@@ -19,7 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 
+import vn.example.btl_orderfood.Database.Database;
 import vn.example.btl_orderfood.ui.Food;
+import vn.example.btl_orderfood.ui.Order;
 
 public class FoodDetail extends AppCompatActivity {
 
@@ -49,7 +51,7 @@ public class FoodDetail extends AppCompatActivity {
         numberButton = (ElegantNumberButton)findViewById(R.id.number_button);
         btncart = (FloatingActionButton)findViewById(R.id.btncart);
 
-        /*btncart.setOnClickListener(new View.OnClickListener() {
+        btncart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Database(getBaseContext()).addToCart(new Order(foodId,
@@ -59,7 +61,7 @@ public class FoodDetail extends AppCompatActivity {
                         currentFood.getDiscount()));
                 Toast.makeText(FoodDetail.this, "Added to cart", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         food_description = (TextView)findViewById(R.id.food_description);
         food_name = (TextView)findViewById(R.id.food_name);
@@ -85,14 +87,14 @@ public class FoodDetail extends AppCompatActivity {
         foods.child(foodId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Food food = dataSnapshot.getValue(Food.class);
+                currentFood = dataSnapshot.getValue(Food.class);
                 //set Image
-                Picasso.with(getBaseContext()).load(food.getImage()).into(food_image);
+                Picasso.with(getBaseContext()).load(currentFood.getImage()).into(food_image);
 
-                collapsingToolbarLayout.setTitle(food.getName());
-                food_price.setText(food.getPrice());
-                food_name.setText(food.getName());
-                food_description.setText(food.getDescription());
+                collapsingToolbarLayout.setTitle(currentFood.getName());
+                food_price.setText(currentFood.getPrice());
+                food_name.setText(currentFood.getName());
+                food_description.setText(currentFood.getDescription());
             }
 
             @Override
