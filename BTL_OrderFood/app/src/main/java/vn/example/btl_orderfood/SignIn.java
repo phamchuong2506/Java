@@ -39,7 +39,7 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final ProgressDialog mDialog=new ProgressDialog(SignIn.this);
-                mDialog.setMessage("vui long doi");
+                mDialog.setMessage("vui long doi.....");
                 mDialog.show();
 
                 table_user.addValueEventListener(new ValueEventListener() {

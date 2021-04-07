@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/food_name"
-            android:text="Ten mon an"
+            android:text="Tên món ăn"
             android:textColor="@android:color/white"
             android:background="#4f0e0d0e"
             android:textSize="20sp"

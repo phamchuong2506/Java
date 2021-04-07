@@ -20,7 +20,7 @@
             android:id="@+id/edtPhone"
             android:hint="Phone number"
             android:textColorHint="@android:color/white"
-            android:text="0974264843"
+            android:text="012345678"
             android:textColor="@android:color/white"
             android:textSize="34sp"
             android:inputType="phone" />
@@ -37,7 +37,7 @@
     </LinearLayout>
     <Button
         android:id="@+id/btnSignIn"
-        android:text="SignIn"
+        android:text="Đăng nhập"
         android:textColor="@color/white"
         android:layout_weight="1"
         android:layout_width="match_parent"

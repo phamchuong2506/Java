@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BTL_OrderFood"
         tools:replace="android:theme">
-        <activity android:name=".OrderStatus"></activity>
+        <activity android:name=".OrderStatus" />
         <activity android:name=".Cart" />
         <activity android:name=".FoodDetail" />
         <activity android:name=".FoodList" />
