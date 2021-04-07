@@ -57,6 +57,7 @@ dependencies {
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    //firebase
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     // For control over item selection of both touch and mouse driven selection

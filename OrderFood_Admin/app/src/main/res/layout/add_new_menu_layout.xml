@@ -42,10 +42,10 @@
                 app:cornerRadius="4dp">
             </Button>
             <Button
+                android:id="@+id/btnUpload"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/btnUpload"
                 android:text="Upload"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="8dp"

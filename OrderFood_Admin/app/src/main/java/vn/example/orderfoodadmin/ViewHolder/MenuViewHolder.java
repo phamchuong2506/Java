@@ -1,5 +1,6 @@
 package vn.example.orderfoodadmin.ViewHolder;
 
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,10 +8,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import vn.example.orderfoodadmin.Common.Common;
 import vn.example.orderfoodadmin.Interface.ItemClickListener;
 import vn.example.orderfoodadmin.R;
 
-public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class MenuViewHolder extends RecyclerView.ViewHolder implements
+        View.OnClickListener ,
+        View.OnCreateContextMenuListener
+{
     public TextView txtMenuName;
     public ImageView imageview;
     private ItemClickListener itemClickListener;
@@ -19,6 +24,7 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
         txtMenuName=(TextView)itemView.findViewById(R.id.menu_name);
         imageview=(ImageView)itemView.findViewById(R.id.menu_image);
+        itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
     }
 
@@ -29,5 +35,13 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View view){
         itemClickListener.onClick(view,getAdapterPosition(),false);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        ContextMenu contextMenu = null;
+        contextMenu.setHeaderTitle("Select the action");
+        contextMenu.add(0,0,getAdapterPosition(), Common.UPDATE);
+        contextMenu.add(0,0,getAdapterPosition(), Common.DELETE);
     }
 }

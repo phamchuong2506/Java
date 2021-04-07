@@ -32,20 +32,10 @@
         android:layout_alignParentBottom="true"
         android:weightSum="2">
         <Button
-            android:id="@+id/btnSignUp"
-            android:text="Đăng ký"
-            android:textColor="@color/white"
-            android:layout_weight="1"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@color/Accent"/>
-
-        <Button
             android:id="@+id/btnSignIn"
             android:text="Đăng nhập"
             android:textColor="@color/white"
-            android:layout_weight="1"
-            android:layout_width="1dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/Accent"
             android:layout_marginLeft="10dp"/>
