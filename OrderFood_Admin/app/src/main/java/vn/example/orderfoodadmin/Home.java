@@ -271,6 +271,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             super.onBackPressed();
         }
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
 
         return super.onOptionsItemSelected(item);
@@ -311,8 +312,22 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 //        return true;
     }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if(item.getTitle().equals(Common.UPDATE))
+        {
+            showUpdateDialog(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
+        }
+        else if(item.getTitle().equals(Common.DELETE))
+        {
+            deleteCategory(adapter.getRef(item.getOrder()).getKey());
+        }
+        return super.onContextItemSelected(item);
+    }
+
     private void deleteCategory(String key) {
     categories.child(key).removeValue();
+    Toast.makeText(this, "Item delete !!!", Toast.LENGTH_SHORT).show();
     }
 
     private void showUpdateDialog(String key, Category item) {
@@ -338,52 +353,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeImage(item, context);
+
+                changeImage(item);
             }
 
-            private void changeImage(Category item, Context context) {
-                if(saveUri!=null)
-                {
-//                    ProgressDialog mDialog = new ProgressDialog(this)
-//                    mDialog.setMessage("Uploading....");
-//                    mDialog.show();
-                        ProgressDialog mDialog= new ProgressDialog(context);
-                        mDialog.setMessage("Uploading....");
-                        mDialog.show();
-                    String imageName= UUID.randomUUID().toString();
-                    StorageReference imageFolder =storageReference.child("image/"+imageName);
-                    imageFolder.putFile(saveUri)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    mDialog.dismiss();
-                                    Toast.makeText(Home.this, "Uploaded !", Toast.LENGTH_SHORT).show();
-                                    imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            //set value for newCategory if imge upload and we can get download link
-                                        item.setImage(uri.toString());
-                                        }
-                                    });
 
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    mDialog.dismiss();
-                                    Toast.makeText(Home.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                                    mDialog.setMessage("Uploaded"+ progress+"%");
-                                }
-                            });
-                }
-            }
         });
 
         alertDialog.setView(add_menu_layout);
@@ -408,6 +382,46 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDialog.show();
 
     }
+    private void changeImage(Category item) {
+        if(saveUri!=null)
+        {
+            ProgressDialog mDialog = new ProgressDialog(this);
+            mDialog.setMessage("Uploading....");
+            mDialog.show();
 
+            String imageName= UUID.randomUUID().toString();
+            StorageReference imageFolder =storageReference.child("image/"+imageName);
+            imageFolder.putFile(saveUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            mDialog.dismiss();
+                            Toast.makeText(Home.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    //set value for newCategory if imge upload and we can get download link
+                                    item.setImage(uri.toString());
+                                }
+                            });
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            mDialog.dismiss();
+                            Toast.makeText(Home.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            mDialog.setMessage("Uploaded"+ progress+"%");
+                        }
+                    });
+        }
+    }
 
 }

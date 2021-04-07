@@ -34,14 +34,15 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClick(View view){
+
         itemClickListener.onClick(view,getAdapterPosition(),false);
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        ContextMenu contextMenu = null;
-        contextMenu.setHeaderTitle("Select the action");
-        contextMenu.add(0,0,getAdapterPosition(), Common.UPDATE);
-        contextMenu.add(0,0,getAdapterPosition(), Common.DELETE);
+
+        menu.setHeaderTitle("Select the action");
+        menu.add(0,0,getAdapterPosition(), Common.UPDATE);
+        menu.add(0,0,getAdapterPosition(), Common.DELETE);
     }
 }
