@@ -317,7 +317,7 @@ public class FoodList extends AppCompatActivity {
 
 
                     foodList.child(key).setValue(item);
-                    Snackbar.make(rootLayout, "Food"+ item.getName()+ "was edited", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootLayout, "Food "+ item.getName()+ " was edited", Snackbar.LENGTH_SHORT).show();
 
             }
         });
