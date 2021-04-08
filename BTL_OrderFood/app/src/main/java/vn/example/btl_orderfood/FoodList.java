@@ -118,7 +118,7 @@ public class FoodList extends AppCompatActivity {
                 Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("Name").equalTo(text.toString())
+                foodList.orderByChild("name").equalTo(text.toString())
         ) {
             @Override
             protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
@@ -132,7 +132,7 @@ public class FoodList extends AppCompatActivity {
                         Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
                         //start activity
                         Intent foodDetails = new Intent(FoodList.this,FoodDetail.class);
-                        foodDetails.putExtra("FoodId",adapter.getRef(position).getKey());
+                        foodDetails.putExtra("foodId",adapter.getRef(position).getKey());
                         startActivity(foodDetails);
                     }
                 });
@@ -142,7 +142,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadSuggest() {
-        foodList.orderByChild(String.valueOf("MenuId".equals(categoryId)))
+        foodList.orderByChild(String.valueOf("menuId".equals(categoryId)))
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -162,7 +162,8 @@ public class FoodList extends AppCompatActivity {
 
     private void loadListFood(String categoryId) {
         adapter=new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
-                R.layout.food_item,FoodViewHolder.class,foodList.orderByChild("MenuId").equalTo(categoryId)) {
+                R.layout.food_item,FoodViewHolder.class,
+                foodList.orderByChild("menuId").equalTo(categoryId)) {
             @Override
             protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
                 viewHolder.food_name.setText(food.getName());
@@ -175,7 +176,7 @@ public class FoodList extends AppCompatActivity {
                         Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
                         //start activity
                         Intent foodDetails = new Intent(FoodList.this,FoodDetail.class);
-                        foodDetails.putExtra("FoodId",adapter.getRef(position).getKey());
+                        foodDetails.putExtra("foodId",adapter.getRef(position).getKey());
                         startActivity(foodDetails);
                     }
                 });
