@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vn.example.orderfoodadmin">
+    package="vn.example.orderfoodadmin" >
 
     <application
         android:allowBackup="true"
@@ -8,14 +8,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OrderFoodAdmin">
-        <activity android:name=".FoodList"></activity>
+        android:theme="@style/Theme.OrderFoodAdmin" >
+        <activity android:name=".OrderStatus" >
+        </activity>
+        <activity android:name=".FoodList" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.OrderFoodAdmin.NoActionBar" />
         <activity android:name=".SignIn" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
