@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -27,6 +29,8 @@ public class OrderStatus extends AppCompatActivity {
 
     FirebaseDatabase db;
     DatabaseReference requests;
+
+    MaterialSprinner sprinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,5 +87,24 @@ public class OrderStatus extends AppCompatActivity {
     private void showUpdateDialog(String key,Request item){
         final AlertDialog.Builder alertDialog =new AlertDialog.Builder(OrderStatus.this);
         alertDialog.setTitle("update order");
+        alertDialog.setMessage("please choose status");
+        LayoutInflater inflater =this.getLayoutInflater();
+        final  View view = inflater.inflate(R.layout.update_order_layout,null);
+        sprinner= (MateralSpinner)view.findViewById(R.id.statusSpinner);
+        sprinner.setItem("Placed","on my way","shipped");
+        alertDialog.setView(view);
+
+        final String localKey =key;
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                item.setStatus(String.valueOf(sprinner.getSelectedIndex()));
+
+                requests.child(localKey).setValue(item);
+
+            }
+        });
+        alertDialog.setNegativeButton("No")
     }
 }
