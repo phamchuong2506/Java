@@ -1,5 +1,6 @@
 package vn.example.orderfoodadmin;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,14 +73,15 @@ public class OrderStatus extends AppCompatActivity {
 
     }
     @Override
-    public  boolean onContextItemSlected(MenuItem item){
-        if (item.getIntent().equals(Common.update))
+    public boolean onContextItemSelected(MenuItem item){
+        if(item.getIntent().equals(Common.UPDATE))
             showUpdateDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-        else if (item.getIntent().equals(Common.delete))
+        else if(item.getIntent().equals(Common.DELETE))
             deleteOrder(adapter.getRef(item.getOrder()).getKey());
-            return super.onContextItemSelected(item);
+        return super.onContextItemSelected(item);
     }
-    private void showUpdateDialog (String key, Request item){
-
+    private void showUpdateDialog(String key,Request item){
+        final AlertDialog.Builder alertDialog =new AlertDialog.Builder(OrderStatus.this);
+        alertDialog.setTitle("update order");
     }
 }
